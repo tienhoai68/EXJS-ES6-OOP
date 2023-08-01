@@ -2,9 +2,10 @@ import { Customer } from "../models/Customer.js";
 import { Employee } from "../models/Employee.js";
 import { Student } from "../models/Student.js";
 import { ListPerson } from "../services/listPerson.js";
+import { Notification } from "../models/Notification.js";
 const domId = (id) => document.getElementById(id);
 const listPerson = new ListPerson();
-console.log(listPerson);
+const notification = new Notification();
 const saveData = () => {
     setlocalStorage();
     renderTable();
@@ -16,35 +17,39 @@ const getValueInput = () => {
     const email = domId("email").value;
     const role = domId("role").value;
     let person;
+    if(notification.checkValidation()) {
     if (role === "Student") {
         const math = parseFloat(domId("math").value);
         const physics = parseFloat(domId("physics").value);
         const chemistry = parseFloat(domId("chemistry").value);
-        person = new Student(id, name, address, email, role, math, physics, chemistry);
-        person.calculateAverage();
-    } else if (role === "Employee") {
-        const workingDays = parseInt(domId("workingDays").value);
-        const dailySalary = parseFloat(domId("dailySalary").value);
-        person = new Employee(id, name, address, email, role, workingDays, dailySalary);
-        person.calculateSalary();
-    } else if (role === "Customer") {
-        const companyName = domId("companyName").value;
-        const orderValue = parseFloat(domId("orderValue").value);
-        const rating = parseFloat(domId("rating").value);
-        person = new Customer(id, name, address, email, role, companyName, orderValue, rating);
+            person = new Student(id, name, address, email, role, math, physics, chemistry);
+            person.calculateAverage(); 
+        } else if (role === "Employee") {
+            const workingDays = parseInt(domId("workingDays").value);
+            const dailySalary = parseFloat(domId("dailySalary").value);
+            person = new Employee(id, name, address, email, role, workingDays, dailySalary);
+            person.calculateSalary();
+        } else if (role === "Customer") {
+            const companyName = domId("companyName").value;
+            const orderValue = parseFloat(domId("orderValue").value);
+            const rating = parseFloat(domId("rating").value);
+            person = new Customer(id, name, address, email, role, companyName, orderValue, rating);
+        }
     }
-    console.log(person);
     return person;
 };
 
 domId("btnThemSP").onclick = () => {
     document.querySelector(".modal-title").innerHTML = "Add User";
     domId("modal-footer").innerHTML = `<button onclick="addUser()" class="btn btn-success">Add</button>`;
+    notification.clearInput();
 }
 window.addUser = () => {
     let user = getValueInput();
-    listPerson.addPerson(user);
-    saveData();
+    if (user) {
+        listPerson.addPerson(user);
+        saveData();
+    }
 }
 const renderTable = (data = listPerson.person) => {
     const content = data.reduce((total, element) => {

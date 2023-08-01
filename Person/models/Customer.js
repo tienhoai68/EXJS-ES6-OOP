@@ -9,7 +9,6 @@ export class Customer extends Person {
     };
     render(data) {
         let content = "";
-        console.log(data.id);
         const { id, name, address, email, companyName, orderValue, rating } = data;
         content += `
                     <tr>
