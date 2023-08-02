@@ -8,10 +8,20 @@ export class Employee extends Person {
         this.salary = 0;      
     };
     calculateSalary() {
-        this.salary =  this.workingDays * this.dailySalary;
+        this.salary =  (this.workingDays * this.dailySalary);
     }
+    convertToVND(Price) {
+        const PriceVND = Price.toLocaleString('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+        });
+      
+        return PriceVND;
+      }
     render(data) {
         const { id, name, address, email, workingDays, dailySalary, salary} = data; 
+        const salaryVND = this.convertToVND(salary);
+        const dailySalaryVND = this.convertToVND(dailySalary);
         let content = "";
         content += `
         <tr>
@@ -22,8 +32,8 @@ export class Employee extends Person {
             <td>
             <ul style="list-style: none;">                        
             <li>WorkingDays: ${workingDays}</li>
-            <li>DailySalary: ${dailySalary}</li>                  
-            <li>TotalSalary: ${salary}</li>                  
+            <li>DailySalary: ${dailySalaryVND}</li>                  
+            <li>TotalSalary: ${salaryVND}</li>                  
             </ul>
             </td>                   
             <td>
