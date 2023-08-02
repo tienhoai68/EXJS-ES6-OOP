@@ -13,7 +13,7 @@ const saveData = () => {
     setlocalStorage();
     renderTable();
 }
-const getValueInput = (isAdd , isExistEmail) => {
+const getValueInput = (isAdd, isExistEmail) => {
     const id = domId("code").value;
     const name = domId("name").value;
     const address = domId("address").value;
@@ -47,6 +47,7 @@ domId("btnThemSP").onclick = () => {
     document.querySelector(".modal-title").innerHTML = "Add User";
     domId("modal-footer").innerHTML = `<button onclick="addUser()" class="btn btn-success">Add</button>`;
     notification.clearInput();
+    notification.hiddenError();
 }
 window.addUser = () => {
     let user = getValueInput(true, true);
@@ -149,9 +150,37 @@ window.updateUser = () => {
     } else {
         person = getValueInput(false, true);
     }
-    if(person) {
+    if (person) {
         listPerson.updatePerson(person);
         saveData();
         document.querySelector(".close").click();
     }
+}
+// ẩn lỗi khi chọn đã options
+window.hiddenOptions = () => {
+    var inputOption = domId("role").value;
+    if (inputOption !== 0) {
+        notification.disableError("errorRole");
+    }
+}
+domId("role").addEventListener("change", hiddenOptions);
+// hàm sắp xếp theo tên
+window.nameSort = () => {
+    let inputSort = getEle("sortName").value;
+    if (inputSort === "AtoZ") {
+        let sortPerson = (listPerson.person).sort(listPerson.sapXepTenAZ);
+        renderTable(sortPerson);
+    } else if  (inputSort === "ZtoA") {
+        let sortPerson = (listPerson.person).sort(listPerson.sapXepTenZA);
+        renderTable(sortPerson);
+    };
+}
+domId("sortName").addEventListener("change", nameSort);  
+
+domId("sortRole").onchange = () => {
+    const role = domId("sortRole").value;
+    console.log(role);
+    const data = listPerson.filterByRole(role);
+    console.log(data);
+    renderTable(data);
 }
