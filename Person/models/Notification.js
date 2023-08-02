@@ -11,7 +11,20 @@ export class Notification {
         domId(errorId).style.display = "none";
         domId(errorId).innerHTML = "";
     };
-
+    hiddenError = () => {
+        this.disableError("errorCode");
+        this.disableError("errorName");
+        this.disableError("errorAddress");
+        this.disableError("errorEmail");
+        this.disableError("errorRole");
+        this.disableError("errorMath");
+        this.disableError("errorPhysics");
+        this.disableError("errorChemistry");
+        this.disableError("errorWorkingDays");
+        this.disableError("errorDailySalary");
+        this.disableError("errorOrderValue");
+        this.disableError("errorRating");
+    };
     clearOption = (idShow, idValue) => {
         domId(idShow).style.display = "none";
         domId(idValue).value = "";
@@ -32,7 +45,7 @@ export class Notification {
         this.clearOption("showOrderValue", "orderValue");
         this.clearOption("showRating", "rating");
     };
-
+    
     clearErrorKeyup = (errorId, value) => {
         function clearErrorWhenInput() {
             // console.log(123);
@@ -69,8 +82,8 @@ export class Notification {
         }
         isValue &= validation.checkEmpty(name, "errorName", "(*) Vui lòng nhập tên") && validation.checkPattern(name, "errorName", "(*) Họ và Tên vui lòng nhập chữ", "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$");
         isValue &= validation.checkEmpty(address, "errorAddress", "(*) Vui lòng nhập địa chỉ");
-        if(isExistEmail) {
-            isValue &= validation.checkEmpty(email, "errorEmail", "(*) Vui lòng nhập email") && validation.checkPattern(email, "errorEmail", "(*) Vui lòng nhập email đúng định dạng", /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)&& validation.checkEmailExist(email, "errorEmail", " (*) Email đã tồn tại", listPerson);
+        if (isExistEmail) {
+            isValue &= validation.checkEmpty(email, "errorEmail", "(*) Vui lòng nhập email") && validation.checkPattern(email, "errorEmail", "(*) Vui lòng nhập email đúng định dạng", /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) && validation.checkEmailExist(email, "errorEmail", " (*) Email đã tồn tại", listPerson);
         }
         isValue &= validation.checkEmptyOption("role", "errorRole", "(*) Vui lòng nhập loại người dùng");
         if (role === "Student") {

@@ -105,7 +105,7 @@
     <div class="tab-content">
       <!--Danh sách sản phẩm -->
       <div role="tabpanel" class="tab-pane in active" id="DanhSachSP">
-        <div class="row">
+        <div class="row mb-2">
           <div class="col-md-3">
             <!-- BEGIN BUTTOM THÊM MỚI -->
             <button id="btnThemSP" class="btn btn-success" data-toggle="modal"
@@ -115,22 +115,22 @@
             </button>
             <!-- END BUTTON THÊM MỚI -->
           </div>
-          <div class="col-md-2"></div>
+          <div class="col-md-4"></div>
           <div class="col-md-3">
-            <select name="" id="productType" class="form-control" >
-                <option value="All">Sản phẩm mới</option>
-                <option value="giaCao">Giá từ thấp đến cao</option>
-                <option value="giaThap">Giá từ cao đến thấp</option>
+            <select name="" id="sortName" class="form-control" >
+                <option value="All">Sắp xếp theo tên</option>
+                <option value="AtoZ">Tên từ A đến Z</option>
+                <option value="ZtoA">Tên từ Z đến Z</option>
             </select>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2">
             <!-- BEGIN TÌM KIẾM -->
-            <div class="input-group mb-3">
-              <input id="searchtxt" type="text" class="form-control" placeholder="Nhập từ khóa" />
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
-              </div>
-            </div>
+            <select name="" id="sortRole" class="form-control" >
+              <option value="All">Loại người dùng</option>
+              <option value="Student">Student</option>
+              <option value="Employee">Employee</option>
+              <option value="Customer">Customer</option>
+          </select>
             <!-- END TÌM KIẾM -->
           </div>
         </div>
