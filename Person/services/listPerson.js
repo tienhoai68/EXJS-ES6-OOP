@@ -15,5 +15,11 @@ export class ListPerson {
             return element.id === id;
         })
         return existedPerson;
+    };
+    updatePerson = (person) => {
+       const index =  this.person.findIndex((element) => {
+            return element.id === person.id;
+        })
+        return this.person[index] = person;
     }
 }

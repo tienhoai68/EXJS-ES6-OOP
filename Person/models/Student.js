@@ -11,9 +11,20 @@ export class Student extends  Person {
     calculateAverage() {
         this.total = (this.math + this.physics + this.chemistry) / 3;
     }
+    roundNumber(Number) {
+        let numberRound = Math.floor(Number * 10) / 10;
+        if (numberRound === 10) {
+            numberRound = 10; 
+        } 
+        return numberRound;
+      }
     render(data) {
         let content ="" ;
         const { id, name, address, email, math, physics, chemistry, total } = data;
+        const numberMath = this.roundNumber(math);
+        const numberPhysics = this.roundNumber(physics);
+        const numberChemistry = this.roundNumber(chemistry);
+        const numberTotal = this.roundNumber(total);
         content += `
             <tr>
                 <td>${id}</td>
@@ -22,10 +33,10 @@ export class Student extends  Person {
                 <td>${email}</td>
                 <td>
                 <ul style="list-style: none;">                        
-                <li>Math: ${math}</li>
-                <li>Physics: ${physics}</li>
-                <li>Chemistry: ${chemistry}</li>                     
-                <li>TotalScore: ${total.toFixed(1)}</li>                     
+                <li>Math: ${numberMath} Điểm</li>
+                <li>Physics: ${numberPhysics} Điểm</li>
+                <li>Chemistry: ${numberChemistry} Điểm</li>                     
+                <li>TotalScore: ${numberTotal} Điểm</li>                     
                 </ul>
                 </td>                   
                 <td>
