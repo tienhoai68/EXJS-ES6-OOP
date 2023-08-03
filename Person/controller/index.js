@@ -35,8 +35,8 @@ const getValueInput = (isAdd, isExistEmail) => {
             person.calculateSalary();
         } else if (role === "Customer") {
             const companyName = domId("companyName").value;
-            const orderValue = parseFloat(domId("orderValue").value);
-            const rating = parseFloat(domId("rating").value);
+            const orderValue = domId("orderValue").value;
+            const rating = domId("rating").value;
             person = new Customer(id, name, address, email, role, companyName, orderValue, rating);
         }
     }
@@ -129,12 +129,22 @@ window.openUpdateModal = (personId) => {
         hiddenEmployee();
         hiddenSubject();
     }
-}
+};
 window.delPerson = (id) => {
-    console.log(id);
-    listPerson.delPerson(id);
-    saveData();
+    document.getElementById("confirmation-popup").style.display = "block";
+  function onDeleteClick() {
+      listPerson.delPerson(id);
+      saveData();
+    document.getElementById("confirmation-popup").style.display = "none";
+    // Gỡ bỏ sự kiện "click" sau khi đã thực thi
+    document.getElementById("confirm-button").removeEventListener("click", onDeleteClick);
+  }
+  
+  document.getElementById("confirm-button").addEventListener("click", onDeleteClick);
 }
+document.getElementById("cancel-button").addEventListener("click", function() {
+    document.getElementById("confirmation-popup").style.display = "none";
+  });
 const findCurrentEmail = () => {
     let account = domId('code').value;
     let currentEmployee = listPerson.findByid(account);
@@ -179,8 +189,6 @@ domId("sortName").addEventListener("change", nameSort);
 
 domId("sortRole").onchange = () => {
     const role = domId("sortRole").value;
-    console.log(role);
     const data = listPerson.filterByRole(role);
-    console.log(data);
     renderTable(data);
-}
+};
