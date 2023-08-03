@@ -30,7 +30,7 @@ const getValueInput = (isAdd, isExistEmail) => {
             person.calculateAverage();
         } else if (role === "Employee") {
             const workingDays = parseInt(domId("workingDays").value);
-            const dailySalary = parseFloat(domId("dailySalary").value);
+            const dailySalary = parseFloat(domId("dailySalary").value.replace(/\s/g, ""));
             person = new Employee(id, name, address, email, role, workingDays, dailySalary);
             person.calculateSalary();
         } else if (role === "Customer") {
@@ -130,6 +130,7 @@ window.openUpdateModal = (personId) => {
         hiddenSubject();
     }
 };
+
 window.delPerson = (id) => {
     document.getElementById("confirmation-popup").style.display = "block";
   function onDeleteClick() {
@@ -191,4 +192,42 @@ domId("sortRole").onchange = () => {
     const role = domId("sortRole").value;
     const data = listPerson.filterByRole(role);
     renderTable(data);
+};
+
+// // show thông tin 
+window.showDetails = (personId) => {
+    console.log(personId);
+    document.querySelector(".modal-title").innerHTML = "Details Person";
+    const existedPerson = listPerson.findByid(personId);
+    const { id, name, address, email, role, math, physics, chemistry, workingDays, dailySalary, companyName, orderValue, rating } = existedPerson;
+    domId("code").value = id;
+    domId("name").value = name;
+    domId("address").value = address;
+    domId("email").value = email
+    domId("role").value = role;
+    if (role === "Student") {
+        console.log(role);
+        showSubject();
+        domId("math").value = math;
+        domId("physics").value = physics;
+        domId("chemistry").value = chemistry;
+        hiddenEmployee();
+        hiddenCustomer();
+        domId("role").disabled = true;
+    } else if (role === "Employee") {
+        showEmployee();
+        domId("workingDays").value = workingDays;
+        domId("dailySalary").value = dailySalary;
+        hiddenSubject();
+        hiddenCustomer();
+        domId("role").disabled = true;
+    } else if (role === "Customer") {
+        showCustomer();
+        domId("companyName").value = companyName;
+        domId("orderValue").value = orderValue;
+        domId("rating").value = rating;
+        hiddenEmployee();
+        hiddenSubject();
+        domId("role").disabled = true;
+    }
 };

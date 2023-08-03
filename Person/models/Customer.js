@@ -16,18 +16,16 @@ export class Customer extends Person {
                         <td>${name}</td>
                         <td>${address}</td>
                         <td>${email}</td>
-                        <td>
-                        <ul style="list-style: none;">                        
-                        <li>CompanyName: ${companyName}</li>
-                        <li>OrderValue: ${orderValue}</li>                  
-                        <li>Rating: ${rating}</li>             
-                        </ul>
+                        <td>                       
+                        CompanyName: ${companyName}                                       
                         </td>                   
                         <td>
                           <button 
                             onclick="openUpdateModal('${id}')" data-toggle="modal"
                             data-target="#myModal" class="btn btn-primary">Edit</button>
                             <button onclick="delPerson('${id}')" class="btn btn-danger" >Del</button>
+                            <button onclick="showDetails('${id}')" data-toggle="modal"
+                            data-target="#myModal" class="btn btn-info">Details</button>
                         </td>                 
                     </tr>
                 `;

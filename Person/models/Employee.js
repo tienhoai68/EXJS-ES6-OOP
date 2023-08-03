@@ -21,7 +21,6 @@ export class Employee extends Person {
     render(data) {
         const { id, name, address, email, workingDays, dailySalary, salary} = data; 
         const salaryVND = this.convertToVND(salary);
-        const dailySalaryVND = this.convertToVND(dailySalary);
         let content = "";
         content += `
         <tr>
@@ -29,18 +28,16 @@ export class Employee extends Person {
             <td>${name}</td>
             <td>${address}</td>
             <td>${email}</td>
-            <td>
-            <ul style="list-style: none;">                        
-            <li>WorkingDays: ${workingDays}</li>
-            <li>DailySalary: ${dailySalaryVND}</li>                  
-            <li>TotalSalary: ${salaryVND}</li>                  
-            </ul>
+            <td>                                                  
+            TotalSalary: ${salaryVND}                       
             </td>                   
             <td>
               <button 
                 onclick="openUpdateModal('${id}')" data-toggle="modal"
                 data-target="#myModal" class="btn btn-primary">Edit</button>
                 <button onclick="delPerson('${id}')" class="btn btn-danger" >Del</button>
+                <button onclick="showDetails('${id}')" data-toggle="modal"
+                    data-target="#myModal" class="btn btn-info">Details</button>
             </td>                 
         </tr>
     `;

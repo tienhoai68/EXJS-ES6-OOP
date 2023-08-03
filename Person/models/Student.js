@@ -21,9 +21,6 @@ export class Student extends  Person {
     render(data) {
         let content ="" ;
         const { id, name, address, email, math, physics, chemistry, total } = data;
-        const numberMath = this.roundNumber(math);
-        const numberPhysics = this.roundNumber(physics);
-        const numberChemistry = this.roundNumber(chemistry);
         const numberTotal = this.roundNumber(total);
         content += `
             <tr>
@@ -31,19 +28,16 @@ export class Student extends  Person {
                 <td>${name}</td>
                 <td>${address}</td>
                 <td>${email}</td>
-                <td>
-                <ul style="list-style: none;">                        
-                <li>Math: ${numberMath} Điểm</li>
-                <li>Physics: ${numberPhysics} Điểm</li>
-                <li>Chemistry: ${numberChemistry} Điểm</li>                     
-                <li>TotalScore: ${numberTotal} Điểm</li>                     
-                </ul>
+                <td>                                   
+                TotalScore: ${numberTotal} Điểm                 
                 </td>                   
                 <td>
                   <button 
                     onclick="openUpdateModal('${id}')" data-toggle="modal"
                     data-target="#myModal" class="btn btn-primary">Edit</button>
                     <button onclick="delPerson('${id}')" class="btn btn-danger" >Del</button>
+                    <button onclick="showDetails('${id}')" data-toggle="modal"
+                    data-target="#myModal" class="btn btn-info">Details</button>
                 </td>                 
             </tr>
         `;
