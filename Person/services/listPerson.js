@@ -22,7 +22,7 @@ export class ListPerson {
         })
         return this.person[index] = person;
     };
-    layPhanTen = (hoTen) => {
+    firstName = (hoTen) => {
         const mangTen = hoTen.split(' ');
         const ten = mangTen[mangTen.length - 1];
         return ten;
@@ -30,8 +30,8 @@ export class ListPerson {
 
     // Hàm so sánh tên theo thứ tự A-Z
     sapXepTenAZ = (a, b) => {
-        const tenA = this.layPhanTen(a.name);
-        const tenB = this.layPhanTen(b.name);
+        const tenA = this.firstName(a.name);
+        const tenB = this.firstName(b.name);
         if (tenA < tenB) {
             return -1;
         }
@@ -43,8 +43,8 @@ export class ListPerson {
 
     // Hàm so sánh tên theo thứ tự Z-A
     sapXepTenZA = (a, b) => {
-        const tenA = this.layPhanTen(a.name);
-        const tenB = this.layPhanTen(b.name);
+        const tenA = this.firstName(a.name);
+        const tenB = this.firstName(b.name);
         if (tenA < tenB) {
             return 1;
         }
