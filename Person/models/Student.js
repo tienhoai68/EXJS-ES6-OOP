@@ -32,13 +32,13 @@ export class Student extends  Person {
                 TotalScore: ${numberTotal} Điểm                 
                 </td>                   
                 <td>
-                  <button 
-                    onclick="openUpdateModal('${id}')" data-toggle="modal"
-                    data-target="#myModal" class="btn btn-primary">Edit</button>
-                    <button onclick="delPerson('${id}')" class="btn btn-danger" >Del</button>
-                    <button onclick="showDetails('${id}')" data-toggle="modal"
-                    data-target="#myModal" class="btn btn-info">Details</button>
-                </td>                 
+                  <button onclick="openUpdateModal('${id}')" data-toggle="modal"
+                    data-target="#myModal" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                    <button onclick="delPerson('${id}')" class="btn btn-danger" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+                <td><button onclick="showDetails('${id}')" data-toggle="modal"
+                    data-target="#myModal" class="btn btn-info"><i class="fa-solid fa-circle-info"></i></button>
+                </td>           
             </tr>
         `;
         return content;

@@ -12,18 +12,24 @@ export class Notification {
         domId(errorId).innerHTML = "";
     };
     hiddenError = () => {
-        this.disableError("errorCode");
-        this.disableError("errorName");
-        this.disableError("errorAddress");
-        this.disableError("errorEmail");
-        this.disableError("errorRole");
-        this.disableError("errorMath");
-        this.disableError("errorPhysics");
-        this.disableError("errorChemistry");
-        this.disableError("errorWorkingDays");
-        this.disableError("errorDailySalary");
-        this.disableError("errorOrderValue");
-        this.disableError("errorRating");
+        const errors = [
+            "errorCode",
+            "errorName",
+            "errorAddress",
+            "errorEmail",
+            "errorRole",
+            "errorMath",
+            "errorPhysics",
+            "errorChemistry",
+            "errorWorkingDays",
+            "errorDailySalary",
+            "errorOrderValue",
+            "errorRating",
+        ];
+    
+        errors.forEach((error) => {
+            this.disableError(error);
+        });
     };
     clearOption = (idShow, idValue) => {
         domId(idShow).style.display = "none";
@@ -108,5 +114,26 @@ export class Notification {
         }
         return isValue;
     }
+    toggleInputDetails = (isDisabled) => {
+        const fields = [
+            "code",
+            "name",
+            "address",
+            "email",
+            "role",
+            "math",
+            "physics",
+            "chemistry",
+            "workingDays",
+            "dailySalary",
+            "companyName",
+            "orderValue",
+            "rating",
+        ];
+    
+        fields.forEach((field) => {
+            domId(field).disabled = isDisabled;
+        });
+    };
 }
 

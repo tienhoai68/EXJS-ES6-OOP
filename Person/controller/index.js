@@ -48,6 +48,7 @@ domId("btnThemSP").onclick = () => {
     domId("modal-footer").innerHTML = `<button onclick="addUser()" class="btn btn-success">Add</button>`;
     notification.clearInput();
     notification.hiddenError();
+    notification.toggleInputDetails(false);
 }
 window.addUser = () => {
     let user = getValueInput(true, true);
@@ -100,6 +101,10 @@ window.openUpdateModal = (personId) => {
     console.log(personId);
     document.querySelector(".modal-title").innerHTML = "Edit Person";
     domId("modal-footer").innerHTML = `<button onclick="updateUser()" class="btn btn-success">Update</button>`;
+    notification.hiddenError();
+    notification.toggleInputDetails(false);
+    domId("role").disabled = true;
+    domId("code").disabled = true;
     const existedPerson = listPerson.findByid(personId);
     const { id, name, address, email, role, math, physics, chemistry, workingDays, dailySalary, companyName, orderValue, rating } = existedPerson;
     domId("code").value = id;
@@ -130,6 +135,23 @@ window.openUpdateModal = (personId) => {
         hiddenSubject();
     }
 };
+// update User
+window.updateUser = () => {
+    let currentEmail = findCurrentEmail();
+    let inputEmail = domId('email').value;
+    let person;
+    if (inputEmail === currentEmail) {
+        validation.disableError('errorEmail');
+        person = getValueInput(false, false);
+    } else {
+        person = getValueInput(false, true);
+    }
+    if (person) {
+        listPerson.updatePerson(person);
+        saveData();
+        document.querySelector(".close").click();
+    }
+}
 
 window.delPerson = (id) => {
     document.getElementById("confirmation-popup").style.display = "block";
@@ -151,22 +173,7 @@ const findCurrentEmail = () => {
     let currentEmployee = listPerson.findByid(account);
     return currentEmployee.email;
 }
-window.updateUser = () => {
-    let currentEmail = findCurrentEmail();
-    let inputEmail = domId('email').value;
-    let person;
-    if (inputEmail === currentEmail) {
-        validation.disableError('errorEmail');
-        person = getValueInput(false, false);
-    } else {
-        person = getValueInput(false, true);
-    }
-    if (person) {
-        listPerson.updatePerson(person);
-        saveData();
-        document.querySelector(".close").click();
-    }
-}
+
 // ẩn lỗi khi chọn đã options
 window.hiddenOptions = () => {
     var inputOption = domId("role").value;
@@ -198,6 +205,10 @@ domId("sortRole").onchange = () => {
 window.showDetails = (personId) => {
     console.log(personId);
     document.querySelector(".modal-title").innerHTML = "Details Person";
+    domId("modal-footer").innerHTML = "";
+    domId("role").disabled = true;
+    notification.hiddenError();
+    notification.toggleInputDetails(true);
     const existedPerson = listPerson.findByid(personId);
     const { id, name, address, email, role, math, physics, chemistry, workingDays, dailySalary, companyName, orderValue, rating } = existedPerson;
     domId("code").value = id;
@@ -213,14 +224,12 @@ window.showDetails = (personId) => {
         domId("chemistry").value = chemistry;
         hiddenEmployee();
         hiddenCustomer();
-        domId("role").disabled = true;
     } else if (role === "Employee") {
         showEmployee();
         domId("workingDays").value = workingDays;
         domId("dailySalary").value = dailySalary;
         hiddenSubject();
         hiddenCustomer();
-        domId("role").disabled = true;
     } else if (role === "Customer") {
         showCustomer();
         domId("companyName").value = companyName;
@@ -228,6 +237,6 @@ window.showDetails = (personId) => {
         domId("rating").value = rating;
         hiddenEmployee();
         hiddenSubject();
-        domId("role").disabled = true;
+        
     }
 };
