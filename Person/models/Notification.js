@@ -84,7 +84,7 @@ export class Notification {
         const role = domId("role").value;
         let isValue = true;
         if (isAdd) {
-            isValue &= validation.checkEmpty(id, "errorCode", "(*) Vui lòng nhập ID") && validation.CheckNumber(id, "errorCode", "(*) ID vui lòng nhập số") && validation.checkExistId(id, "errorCode", "(*) ID đã tồn tại", listPerson);
+            isValue &= validation.checkEmpty(id, "errorCode", "(*) Vui lòng nhập ID") && validation.checkPattern(id, "errorCode", "(*) ID vui lòng nhập số","^(0|[1-9][0-9]*)$") && validation.checkExistId(id, "errorCode", "(*) ID đã tồn tại", listPerson);
         }
         isValue &= validation.checkEmpty(name, "errorName", "(*) Vui lòng nhập tên") && validation.checkPattern(name, "errorName", "(*) Họ và Tên vui lòng nhập chữ", "^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$");
         isValue &= validation.checkEmpty(address, "errorAddress", "(*) Vui lòng nhập địa chỉ");

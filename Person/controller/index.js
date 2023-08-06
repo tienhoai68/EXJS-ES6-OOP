@@ -20,7 +20,6 @@ const getValueInput = (isAdd, isExistEmail) => {
     const email = domId("email").value;
     const role = domId("role").value;
     let person;
-    console.log(listPerson.person);
     if (notification.checkValidation(listPerson.person, isAdd, isExistEmail)) {
         if (role === "Student") {
             const math = parseFloat(domId("math").value);
@@ -44,7 +43,7 @@ const getValueInput = (isAdd, isExistEmail) => {
 };
 
 domId("btnThemSP").onclick = () => {
-    document.querySelector(".modal-title").innerHTML = "Add User";
+    document.querySelector(".modal-title").innerHTML = `<i class="fa-solid fa-users"></i> Add User`;
     domId("modal-footer").innerHTML = `<button onclick="addUser()" class="btn btn-success">Add</button>`;
     notification.clearInput();
     notification.hiddenError();
@@ -55,6 +54,11 @@ window.addUser = () => {
     if (user) {
         listPerson.addPerson(user);
         saveData();
+        Swal.fire(
+            'Add person success!',
+            'You clicked the button!',
+            'success'
+        )
         document.querySelector(".close").click();
     }
 }
@@ -98,7 +102,6 @@ window.onload = () => {
     renderTable();
 }
 window.openUpdateModal = (personId) => {
-    console.log(personId);
     document.querySelector(".modal-title").innerHTML = "Edit Person";
     domId("modal-footer").innerHTML = `<button onclick="updateUser()" class="btn btn-success">Update</button>`;
     notification.hiddenError();
@@ -113,7 +116,6 @@ window.openUpdateModal = (personId) => {
     domId("email").value = email
     domId("role").value = role;
     if (role === "Student") {
-        console.log(role);
         showSubject();
         domId("math").value = math;
         domId("physics").value = physics;
@@ -149,25 +151,35 @@ window.updateUser = () => {
     if (person) {
         listPerson.updatePerson(person);
         saveData();
+        Swal.fire(
+            'Update person success!',
+            'You clicked the button!',
+            'success'
+        )
         document.querySelector(".close").click();
     }
 }
-
-window.delPerson = (id) => {
-    document.getElementById("confirmation-popup").style.display = "block";
-  function onDeleteClick() {
-      listPerson.delPerson(id);
-      saveData();
-    document.getElementById("confirmation-popup").style.display = "none";
-    // Gỡ bỏ sự kiện "click" sau khi đã thực thi
-    document.getElementById("confirm-button").removeEventListener("click", onDeleteClick);
-  }
-  
-  document.getElementById("confirm-button").addEventListener("click", onDeleteClick);
+window.delPerson = (id) => { 
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            listPerson.delPerson(id);
+            saveData();
+          Swal.fire(
+            `Delete ${id} success!`,
+            'Your data has been deleted.',
+            'success'
+          )
+        }
+      }); 
 }
-document.getElementById("cancel-button").addEventListener("click", function() {
-    document.getElementById("confirmation-popup").style.display = "none";
-  });
 const findCurrentEmail = () => {
     let account = domId('code').value;
     let currentEmployee = listPerson.findByid(account);
@@ -203,7 +215,6 @@ domId("sortRole").onchange = () => {
 
 // // show thông tin 
 window.showDetails = (personId) => {
-    console.log(personId);
     document.querySelector(".modal-title").innerHTML = "Details Person";
     domId("modal-footer").innerHTML = "";
     domId("role").disabled = true;

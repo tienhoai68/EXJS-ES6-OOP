@@ -13,6 +13,8 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <!-- fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 
@@ -152,13 +154,13 @@
             <tbody class="text-center" id="tblDanhSachSP"></tbody>
           </table>
           <!-- <div id="loader" class="custom-loader" style="display: none;"></div> -->
-          <div id="confirmation-popup" class="popup">
+          <!-- <div id="confirmation-popup" class="popup">
             <div class="popup-content">
               <p class="text-center">Are you sure?</p>
               <button class="btn btn-danger" id="confirm-button">Yes</button>
-              <button class="btn btn-info" id="cancel-button">No</button>
+              <button type="button" class="cancel-button btn btn-primary" data-dismiss="modal">No</button>
             </div>
-          </div>
+          </div> -->
           <!-- END TABLE SẢN PHẨM -->
         </div>
         <br />
@@ -184,35 +186,35 @@
             <div class="row" id="personForm">
               <div class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Code</label>
+                  <label><i class="fa-regular fa-id-card"></i> Code</label>
                   <input class="form-control" type="text" id="code" placeholder="Mã" required>
                   <span class="sp-thongbao" id="errorCode"></span>
                 </div>               
               </div>
               <div class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Name</label>
+                  <label><i class="fas fa-user"></i> Name</label>
                   <input class="form-control" type="text" id="name" placeholder="Họ tên" required>
                   <span class="sp-thongbao" id="errorName"></span>
                 </div>               
               </div>
               <div class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Address</label>
+                  <label><i class="fa-solid fa-location-dot"></i> Address</label>
                   <input class="form-control" type="text" id="address" placeholder="Địa chỉ" required>
                   <span class="sp-thongbao" id="errorAddress"></span>
                 </div>               
               </div>
               <div class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Email</label>
+                  <label><i class="fa-solid fa-envelope"></i> Email</label>
                   <input class="form-control" type="email" id="email" placeholder="Email" required>
                   <span class="sp-thongbao" id="errorEmail"></span>
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Loại người dùng</label>
+                  <label><i class="fa-regular fa-square-caret-down"></i> Loại người dùng</label>
                   <select class="form-control" id="role" required>
                     <option value="0" disabled selected>Chọn loại người dùng</option>
                     <option value="Student">Học viên</option>
@@ -224,56 +226,56 @@
               </div>
               <div style="display: none;" id="showToan" class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Math</label>
+                  <label><i class="fa-solid fa-calculator"></i> Math</label>
                   <input class="form-control" type="text" id="math" placeholder="Điểm toán">
                   <span class="sp-thongbao" id="errorMath"></span>
                 </div>
               </div>
               <div style="display: none;" id="showLy"  class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Physics</label>
+                  <label><i class="fa-solid fa-atom"></i> Physics</label>
                   <input class="form-control" type="text" id="physics" placeholder="Điểm lý">
                   <span class="sp-thongbao" id="errorPhysics"></span>
                 </div>
               </div>
               <div style="display: none;" id="showHoa" class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Chemistry</label>
+                  <label><i class="fa-solid fa-flask-vial"></i> Chemistry</label>
                   <input class="form-control" type="text" id="chemistry" placeholder="Điểm hóa">
                   <span class="sp-thongbao" id="errorChemistry"></span>
                 </div>
               </div>
               <div style="display: none;" id="showWorkingDays" class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>WorkingDays</label>
+                  <label><i class="fa-solid fa-briefcase"></i> WorkingDays</label>
                   <input class="form-control" type="text" id="workingDays" placeholder="Số ngày làm việc">
                   <span class="sp-thongbao" id="errorWorkingDays"></span>
                 </div>
               </div>
               <div style="display: none;" id="showDailySalary" class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>DailySalary</label>
+                  <label><i class="fa-solid fa-sack-dollar"></i> DailySalary</label>
                   <input class="form-control" type="text" id="dailySalary" placeholder="Lương theo ngày">
                   <span class="sp-thongbao" id="errorDailySalary"></span>
                 </div>
               </div>
               <div style="display: none;" id="showCompanyName" class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>CompanyName</label>
+                  <label><i class="fa-solid fa-building"></i> CompanyName</label>
                   <input class="form-control" type="text" id="companyName" placeholder="Tên công ty">
                   <span class="sp-thongbao" id="errorCompanyName"></span>
                 </div>
               </div>
               <div style="display: none;" id="showOrderValue" class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>OrderValue</label>
+                  <label><i class="fa-solid fa-file-invoice"></i> OrderValue</label>
                   <input class="form-control" type="text" id="orderValue" placeholder="Trị giá hóa đơn">
                   <span class="sp-thongbao" id="errorOrderValue"></span>
                 </div>
               </div>
               <div style="display: none;" id="showRating" class="col-md-6 mb-3">
                 <div class="form-group">
-                  <label>Rating</label>
+                  <label><i class="fa-solid fa-star"></i> Rating</label>
                   <input class="form-control" type="text" id="rating" placeholder="Đánh giá">
                   <span class="sp-thongbao" id="errorRating"></span>
                 </div>
@@ -308,6 +310,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script type="module" src="./controller/index.js"></script>
     <script src="./controller/main.js"></script>
 </body>
